@@ -70,7 +70,13 @@ export class FormComponent {
     if (this.form.valid) {
       const data = this.form.getRawValue() as FichePaieInput;
 
-      // Transformer les montants pour s'assurer qu'ils sont bien des nombres
+      if ((data.congesPris ?? 0) > (data.joursOuvrablesParMois ?? 22)) {
+        alert(
+          `Le nombre de congés pris (${data.congesPris}) ne peut pas dépasser les jours ouvrables (${data.joursOuvrablesParMois ?? 22}).`
+        );
+        return;
+      }
+
       data.autresAvantages = (data.autresAvantages ?? []).map((v: any) => ({
         nom: v.nom,
         montant: Number(v.montant) || 0
@@ -82,5 +88,6 @@ export class FormComponent {
       alert('Veuillez remplir correctement tous les champs requis.');
     }
   }
+
 
 }

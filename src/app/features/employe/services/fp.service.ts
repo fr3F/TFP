@@ -6,6 +6,7 @@ export class FpService {
 
   calculer(data: FichePaieInput): FichePaieResult {
     const joursOuvrables = data.joursOuvrablesParMois ?? 22;
+    console.log('joursOuvrables', joursOuvrables);
     const salaireBase = data.salaireBase ?? 0;
     const prime = data.prime ?? 0;
     const heureSup = data.heureSup ?? 0;
