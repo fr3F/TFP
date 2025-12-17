@@ -50,7 +50,10 @@ export class FpService {
       prime,
       heureSup,
       indemnite,
-      autresAvantages: data.autresAvantages,
+      // Ne passer autresAvantages que s'il contient des éléments
+      ...(data.autresAvantages && data.autresAvantages.length > 0
+        ? { autresAvantages: data.autresAvantages }
+        : {}),
       nbCharge: data.nbCharge
     });
   }
