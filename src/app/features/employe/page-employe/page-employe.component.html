@@ -1,0 +1,26 @@
+<main class="container mx-auto max-screen">
+  <!-- Header -->
+  <header class="mb-8 text-center">
+    <h1 class="text-3xl font-bold mb-2 text-gray-800">
+      Calcul de fiche de paie
+    </h1>
+    <p class="text-gray-600">
+      Simulation de fiche de paie (Angular 18 – sans backend)
+    </p>
+  </header>
+
+  <!-- Section principale en deux lignes -->
+  <section class="grid grid-cols-1 gap-6">
+    <!-- Formulaire -->
+    <div class="shadow-md rounded-2xl p-6 hover:shadow-lg transition-shadow">
+      <app-form></app-form>
+    </div>
+
+    <!-- Résultat -->
+    <div
+      class="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition-shadow"
+    >
+      <app-result></app-result>
+    </div>
+  </section>
+</main>

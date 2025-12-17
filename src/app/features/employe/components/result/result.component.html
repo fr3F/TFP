@@ -1,0 +1,141 @@
+<div
+  *ngIf="result() as r"
+  class="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-6 mt-6"
+>
+  <!-- En-tête -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">Bulletin de Salaire</h2>
+    <span class="text-gray-500">Mois : Décembre 2025</span>
+  </div>
+
+  <!-- Infos employé -->
+  <div class="grid grid-cols-2 gap-4 mb-6 text-gray-700">
+    <div><span class="font-semibold">Nom :</span> {{ r.nom }}</div>
+    <div><span class="font-semibold">Poste :</span> {{ r.poste }}</div>
+    <div>
+      <span class="font-semibold">Jours ouvrables :</span>
+      {{ r.joursOuvrablesParMois ?? 22 }}
+    </div>
+    <div>
+      <span class="font-semibold">Congés pris :</span>
+      {{ r.congesPris ?? 0 }} jours
+    </div>
+  </div>
+
+  <!-- Tableau des revenus -->
+  <h3 class="text-lg font-semibold text-gray-800 mb-2">Revenus</h3>
+  <table class="w-full table-auto border border-gray-300 mb-6">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="px-3 py-2 text-left border-b border-gray-300">
+          Description
+        </th>
+        <th class="px-3 py-2 text-right border-b border-gray-300">
+          Montant (Ar)
+        </th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-700">
+      <tr>
+        <td class="px-3 py-2 border-b border-gray-200">Salaire de base</td>
+        <td class="px-3 py-2 text-right border-b border-gray-200">
+          {{ r.salaireBase | number }}
+        </td>
+      </tr>
+      <tr>
+        <td class="px-3 py-2 border-b border-gray-200">Prime</td>
+        <td class="px-3 py-2 text-right border-b border-gray-200">
+          {{ r.prime | number }}
+        </td>
+      </tr>
+      <tr>
+        <td class="px-3 py-2 border-b border-gray-200">
+          Salaire Heures supplémentaires
+        </td>
+        <td class="px-3 py-2 text-right border-b border-gray-200">
+          {{ r.salaireheureSup | number }}
+        </td>
+      </tr>
+      <tr>
+        <td class="px-3 py-2 border-b border-gray-200">
+          Heures supplémentaires
+        </td>
+        <td class="px-3 py-2 text-right border-b border-gray-200">
+          {{ r.heureSup | number }}
+        </td>
+      </tr>
+      <tr>
+        <td class="px-3 py-2 border-b border-gray-200">Congés payés</td>
+        <td class="px-3 py-2 text-right border-b border-gray-200">
+          {{
+            (r.congesPris ?? 0) *
+              ((r.salaireBase ?? 0) / (r.joursOuvrablesParMois ?? 22))
+              | number : "1.2-2"
+          }}
+        </td>
+      </tr>
+      <tr class="font-bold">
+        <td class="px-3 py-2 border-t border-gray-300">Salaire brut</td>
+        <td class="px-3 py-2 text-right border-t border-gray-300">
+          {{ r.brut | number }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Tableau des autres avantages -->
+  <div *ngIf="r.autresAvantages && r.autresAvantages.length > 0">
+    <h3 class="text-lg font-semibold text-gray-800 mb-2">Autres avantages</h3>
+    <table class="w-full table-auto border border-gray-300 mb-6 text-gray-700">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-3 py-2 text-left border-b border-gray-300">Nom</th>
+          <th class="px-3 py-2 text-right border-b border-gray-300">
+            Montant (Ar)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of r.autresAvantages">
+          <td class="px-3 py-2 border-b border-gray-200">{{ a.nom }}</td>
+          <td class="px-3 py-2 text-right border-b border-gray-200">
+            {{ a.montant | number }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tableau des retenues -->
+  <h3 class="text-lg font-semibold text-gray-800 mb-2">Retenues</h3>
+  <table class="w-full table-auto border border-gray-300 mb-6 text-gray-700">
+    <tbody>
+      <tr>
+        <td class="px-3 py-2 border-b border-gray-200">CNAPS (1%)</td>
+        <td class="px-3 py-2 text-right border-b border-gray-200 text-red-600">
+          - {{ r.cnaps | number }}
+        </td>
+      </tr>
+      <tr>
+        <td class="px-3 py-2 border-b border-gray-200">OSIE (1%)</td>
+        <td class="px-3 py-2 text-right border-b border-gray-200 text-red-600">
+          - {{ r.ostie | number }}
+        </td>
+      </tr>
+      <tr>
+        <td class="px-3 py-2 border-b border-gray-200">IRSA</td>
+        <td class="px-3 py-2 text-right border-b border-gray-200 text-red-600">
+          - {{ r.irsa | number }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Net à payer -->
+  <div
+    class="flex justify-between items-center bg-gray-100 p-4 rounded-lg font-bold text-lg"
+  >
+    <span>Net à payer</span>
+    <span class="text-green-600 text-xl">{{ r.net | number }} Ar</span>
+  </div>
+</div>

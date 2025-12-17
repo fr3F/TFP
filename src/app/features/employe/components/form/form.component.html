@@ -1,0 +1,211 @@
+<section class="max-w-5xl mx-auto px-4">
+  <!-- Card -->
+  <div class=" ">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-10">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+          Informations de l’employé
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Nom -->
+          <div class="space-y-1">
+            <label for="nom" class="label">Nom complet</label>
+            <input
+              type="text"
+              formControlName="nom"
+              placeholder="Ex : Fitiavana"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+
+          <!-- Poste -->
+          <div class="space-y-1">
+            <label for="poste" class="label">Poste occupé</label>
+            <input
+              type="text"
+              formControlName="poste"
+              placeholder="Ex : Développeur web"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Rémunération</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="space-y-1">
+            <label class="label">Salaire de base (Ar)</label>
+            <input
+              type="number"
+              formControlName="salaireBase"
+              placeholder="Ex : 1000000"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label class="label">Prime (Ar)</label>
+            <input
+              type="number"
+              formControlName="prime"
+              placeholder="Ex : 10000"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label class="label">Indemnité (Ar)</label>
+            <input
+              type="number"
+              formControlName="indemnite"
+              placeholder="Ex : 10000"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+          Congés & charges
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="space-y-1">
+            <label class="label">Personnes à charge</label>
+            <input
+              type="number"
+              formControlName="nbCharge"
+              placeholder="Ex : 10000"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label class="label">Congés pris (jours)</label>
+            <input
+              type="number"
+              formControlName="congesPris"
+              placeholder="Ex : 2"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label class="label">Jours ouvrables / mois</label>
+            <input
+              type="number"
+              formControlName="joursOuvrablesParMois"
+              placeholder="Ex : 22"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">➕ Suppléments</h3>
+
+        <!-- Toggles -->
+        <div class="flex flex-wrap gap-3 mb-6">
+          <button type="button" (click)="toggleHeuresSup()" class="pill-blue">
+            ⏱️ Heures supplémentaires
+          </button>
+
+          <button
+            type="button"
+            (click)="toggleAutresAvantages()"
+            class="pill-purple"
+          >
+            🎁 Autres avantages
+          </button>
+        </div>
+
+        <!-- Heures sup -->
+        <div
+          *ngIf="showHeuresSup"
+          class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 animate-fade"
+        >
+          <div class="space-y-1">
+            <label class="label">Salaire par heure supplémentaire</label>
+            <input
+              type="number"
+              formControlName="salaireheureSup"
+              placeholder="Ex : 12000"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label class="label">Nombre d’heures</label>
+            <input
+              type="number"
+              formControlName="heureSup"
+              placeholder="Ex : 2"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+            />
+          </div>
+        </div>
+
+        <!-- Autres avantages -->
+        <div
+          *ngIf="showAutresAvantages"
+          class="space-y-3 animate-fade"
+          formArrayName="autresAvantages"
+        >
+          <div
+            *ngFor="let a of autresAvantages.controls; let i = index"
+            [formGroupName]="i"
+            class="flex gap-2 items-end"
+          >
+            <div class="flex-1 space-y-1">
+              <label class="label">Avantage</label>
+              <input
+                type="text "
+                formControlName="nom"
+                placeholder="Ex : Congé parental"
+                class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+              />
+            </div>
+
+            <div class="w-32 space-y-1">
+              <label class="label">Montant</label>
+              <input
+                type="number"
+                formControlName="montant"
+                placeholder="Ex : 2"
+                class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-800 shadow-sm transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-gray-400"
+              />
+            </div>
+
+            <button
+              type="button"
+              (click)="removeAvantage(i)"
+              class="text-red-500 hover:text-red-700 pb-2"
+              *ngIf="autresAvantages.length > 1"
+            >
+              🗑️
+            </button>
+          </div>
+
+          <button
+            type="button"
+            (click)="addAvantage()"
+            class="text-purple-600 font-medium hover:underline"
+          >
+            ➕ Ajouter un avantage
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-4 rounded-2xl hover:opacity-90 transition"
+      >
+        Calculer la fiche de paie
+      </button>
+    </form>
+  </div>
+</section>
